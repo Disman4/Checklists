@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ChecklistsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
