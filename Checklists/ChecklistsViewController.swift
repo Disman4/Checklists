@@ -9,9 +9,41 @@ import UIKit
 
 class ChecklistsViewController: UITableViewController {
     
+    let row0text = "Walk the dog"
+    let row1text = "Brush teeth"
+    let row2text = "Learn iOS development"
+    let row3text = "Soccer practice"
+    let row4text = "Eat ice cream"
+    
+    var row0checked = false
+    var row1checked = false
+    var row2checked = false
+    var row3checked = false
+    var row4checked = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+    }
+    
+    func configureCheckmark(for cell: UITableViewCell,at indexPath: IndexPath){
+    var isChecked = false
+      if indexPath.row == 0 {
+          isChecked = row0checked
+            } else if indexPath.row == 1 {
+              isChecked = row1checked
+            } else if indexPath.row == 2 {
+              isChecked = row2checked
+            } else if indexPath.row == 3 {
+              isChecked = row3checked
+            } else if indexPath.row == 4 {
+              isChecked = row4checked
+            }
+            if isChecked {
+              cell.accessoryType = .checkmark
+          } else {
+              cell.accessoryType = .none
+            }
     }
     
     //MARK  : - TableView Data Source
@@ -25,34 +57,50 @@ class ChecklistsViewController: UITableViewController {
         let label = cell.viewWithTag(1000) as! UILabel
         
         if indexPath.row == 0{
-            label.text = "Walk with me"
+            label.text = row0text
         }else if indexPath.row == 1{
-            label.text = "Take a shower"
+            label.text = row1text
         }else if indexPath.row  == 2{
-            label.text = "Go to gym"
+            label.text = row2text
         }else if indexPath.row  == 3{
-            label.text = "Talk to mom"
+            label.text = row3text
         }else if indexPath.row  == 4{
-            label.text = "Call Fabian"
+            label.text = row4text
         }
         
+        configureCheckmark(for: cell, at: indexPath)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath){
-            if cell.accessoryType == .none {
-                cell.accessoryType = .checkmark
-            } else {
-                cell.accessoryType = .none
+            var isChecked = false
+            if indexPath.row == 0 {
+                row0checked.toggle()
+                isChecked = row0checked
+                } else if indexPath.row == 1 {
+                    row1checked.toggle()
+                    isChecked = row1checked
+                } else if indexPath.row == 2 {
+                    row2checked.toggle()
+                    isChecked = row2checked
+                } else if indexPath.row == 3 {
+                    row3checked.toggle()
+                    isChecked = row3checked
+                } else if indexPath.row == 4 {
+                    row4checked.toggle()
+                    isChecked = row4checked
+                }
+                if isChecked {
+                    cell.accessoryType = .checkmark
+                } else {
+                    cell.accessoryType = .none
+                }
             }
-    }
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     
-   tableView.deselectRow(at: indexPath, animated: true)
 }
 
-
-
-
-}
-
+    
