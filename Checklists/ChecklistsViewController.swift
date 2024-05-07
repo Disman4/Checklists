@@ -11,8 +11,23 @@ class ChecklistsViewController: UITableViewController {
     
     var items = [ChecklistItem]()
     
+    @IBAction func addItem(){
+        let newRowIndex = items.count
+        
+        let item = ChecklistItem()
+        item.text = "I am new row"
+        items.append(item)
+        
+        let indexPath = IndexPath(row: newRowIndex, section: 0)
+          let indexPaths = [indexPath]
+          tableView.insertRows(at: indexPaths, with: .automatic)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         let item1 = ChecklistItem()
         item1.text = "Walk the dog"
